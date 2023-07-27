@@ -3,6 +3,7 @@ const router = express.Router();
 const Video = require('../models/video');
 const Product = require('../models/product');
 const Comment = require('../models/comment');
+const { formatCurrency, formatTimestamp } = require('../utils/utils');
 
 
 const errorHandler = (err, req, res, next) => {
@@ -29,21 +30,19 @@ router.get('/products', async (req, res, next) => {
 
     try {
         const products = await Product.find({ videoId }, 'productId linkProduct title price');
-        res.json(products);
+        const formattedProducts = products.map((product) => ({
+            productId: product.productId,
+            linkProduct: product.linkProduct,
+            title: product.title,
+            price: formatCurrency(product.price), // Use the formatCurrency function to convert to Rupiah format
+        }));
+
+        res.json(formattedProducts);
     } catch (err) {
         next(err);
     }
 });
 
-const formatTimestamp = (timestamp) => {
-    const date = new Date(timestamp);
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${hours}:${minutes} ${day}-${month}-${year}`;
-};
 
 // API Comment List
 router.get('/comments', async (req, res, next) => {
@@ -55,7 +54,6 @@ router.get('/comments', async (req, res, next) => {
     try {
         const comments = await Comment.find({ videoId }, 'userName comment createdAt updatedAt');
 
-        // Map the comments array to modify the timestamp field based on updatedAt or createdAt
         const formattedComments = comments.map((comment) => ({
             userName: comment.userName,
             comment: comment.comment,
