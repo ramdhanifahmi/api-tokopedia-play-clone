@@ -4,12 +4,13 @@ const Video = require('../models/video');
 const Product = require('../models/product');
 const Comment = require('../models/comment');
 
-// Video Thumbnail List - Method: GET
+
 const errorHandler = (err, req, res, next) => {
     console.error('Error:', err);
     res.status(500).json({ error: 'Internal server error' });
 };
 
+// API Video Thumbnail List
 router.get('/videos', async (req, res, next) => {
     try {
         const videos = await Video.find({}, 'videoId urlImageThumbnail');
@@ -19,6 +20,7 @@ router.get('/videos', async (req, res, next) => {
     }
 });
 
+// API Product List
 router.get('/products', async (req, res, next) => {
     const { videoId } = req.query;
     if (!videoId) {
@@ -43,6 +45,7 @@ const formatTimestamp = (timestamp) => {
     return `${hours}:${minutes} ${day}-${month}-${year}`;
 };
 
+// API Comment List
 router.get('/comments', async (req, res, next) => {
     const { videoId } = req.query;
     if (!videoId) {
@@ -65,7 +68,7 @@ router.get('/comments', async (req, res, next) => {
     }
 });
 
-
+// API Submit Comment
 router.post('/comments', async (req, res, next) => {
     const { videoId, userName, comment } = req.body;
     if (!videoId || !userName || !comment) {
@@ -81,7 +84,7 @@ router.post('/comments', async (req, res, next) => {
     }
 });
 
-// Add the error handling middleware to the router
+// The error handling middleware to the router
 router.use(errorHandler);
 
 module.exports = router;

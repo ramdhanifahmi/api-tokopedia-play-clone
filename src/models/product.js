@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
     linkProduct: { type: String, required: true },
     title: { type: String, required: true },
     price: { type: Number, required: true },
-    createdAt: { type: Number, default: Date.now }, // Using Number type for timestamps (timemillis)
+    createdAt: { type: Number, default: Date.now },
     createdBy: { type: String },
     updatedAt: { type: Number },
     updatedBy: { type: String },
