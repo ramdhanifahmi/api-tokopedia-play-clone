@@ -73,6 +73,53 @@ The database for this API uses MongoDB as the backend database. It consists of t
 
 ## API Structure
 
+The Tokopedia Play Clone API is structured using the Node.js and Express framework, with MongoDB as the database. The project follows a modular architecture to keep the code organized and maintainable. Below is an overview of the main components and directories in the project:
+
+### Directory Structure
+```
+api-tokopedia-play-clone/
+|-- src/
+| |-- models/
+| | |-- comment.js
+| | |-- product.js
+| | |-- video.js
+| |-- routes/
+| | |-- routes.js
+| |-- utils/
+| | |-- utils.js
+| |-- .env
+| |-- dummyData.js
+| |-- index.js
+|-- package.json
+|-- package-lock.json
+|-- README.md
+```
+
+### Description of Directories and Files
+
+1. `src/`: This directory contains the main source code of the application.
+
+2. `src/models/`: This directory contains the MongoDB models for the different entities in the application. Each model is defined as a separate file (comment.js, product.js, video.js).
+
+3. `src/routes/`: The routes directory holds the API endpoints for handling different HTTP requests. All of Http rquests currently in one file (routes.js)
+
+4. `src/utils/`: The utils directory contains utility functions used across the application. In this project, we have two utility functions for formatting currency and timestamps.
+
+5. `src/index.js`: This is the entry point of the application. It sets up the Express server, connects to the MongoDB database, and defines the routes.
+
+6. `src/.env`: The .env file holds environment variables, such as the MongoDB connection URL and the port number, which are used to configure the application.
+
+7. `src/dataDummy.js`: This file contains JavaScript objects that represent dummy documents for the `Video`, `Product`, and `Comment` collections. These objects serve as mock data and provide a sample dataset to work with before integrating the actual MongoDB database.
+
+8. `package.json`: The package.json file includes the project dependencies and scripts required for running and managing the application.
+
+9. `README.md`: The README file provides documentation for the project, including installation instructions, API usage, and project structure.
+
+The directory structure is designed to keep the code organized and modular. The `models/` directory holds the MongoDB models for each entity in the application, and the `routes/` directory contain the API endpoints for each resource to improve maintainability. The `utils/` directory contains utility functions used throughout the application. The `index.js` file serves as the entry point of the application and is responsible for setting up the server and connecting to the database. The `package.json` file manages project dependencies, and the `.env` file holds environment-specific configuration variables.
+
+
+## List API Request and Response
+
 The API provides the following endpoints:
 
 ### Video Thumbnail List
