@@ -128,8 +128,8 @@ The API provides the following endpoints:
 
 Returns a list of video thumbnails.
 
-- **URL Params**
-  None
+- **URL Params Optional:**
+  `videoId=[string]`
 
 - **Data Params**
   None
@@ -142,10 +142,12 @@ Returns a list of video thumbnails.
     - **Content:**
       ```
       {
-        "videos": [
+         "videos": [
           {
             "videoId": "vid001",
-            "urlImageThumbnail": "https://example.com/thumbnail1.jpg"
+            "urlImageThumbnail": "https://example.com/thumbnail1.jpg",
+            "embedYoutubeId": "youtube001",
+            "productName": "Product Name 1"
           },
           // More video thumbnails...
         ]
@@ -167,8 +169,10 @@ Returns a list of video thumbnails.
 
 Returns a list of products associated with a specific video.
 
-- **URL Params**
-  **Required:** `videoId=[string]`
+- **URL Params:** videoId or title is required in query parameters
+  `videoId=[string]`
+  `title=[string]`
+
 
 - **Data Params**
   None
@@ -186,11 +190,18 @@ Returns a list of products associated with a specific video.
             "productId": "product1",
             "linkProduct": "https://www.example.com/product1",
             "title": "Sample Product 1",
-            "price": "Rp 280.999"
+            "price": "Rp 280.999"
           },
           // More products...
         ]
       }
+      ```
+
+- **No Product Found Response**
+    - **Code:** 200
+    - **Content:**
+      ```
+      []
       ```
 
 - **Error Response**
@@ -198,7 +209,7 @@ Returns a list of products associated with a specific video.
     - **Content:**
       ```
       {
-        "error": "videoId is required in query parameters"
+        "error": "videoId or title is required in query parameters"
       }
       ```
 
