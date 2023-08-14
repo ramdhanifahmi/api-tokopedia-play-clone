@@ -13,35 +13,71 @@ const errorHandler = (err, req, res, next) => {
 
 // API Video Thumbnail List
 router.get('/videos', async (req, res, next) => {
+    const requestedVideoId = req.query.videoId;
+
     try {
-        const videos = await Video.find({}, 'videoId urlImageThumbnail');
-        res.json(videos);
+        if (requestedVideoId) {
+            const video = await Video.findOne({ videoId: requestedVideoId }, 'videoId urlImageThumbnail embedYoutubeId productName');
+            if (!video) {
+                return res.status(404).json({ message: 'Video not found' });
+            }
+
+            const { _id, videoId, urlImageThumbnail, embedYoutubeId, productName } = video;
+            return res.json({ _id, videoId, urlImageThumbnail, embedYoutubeId, productName });
+        } else {
+            const videos = await Video.find({}, 'videoId urlImageThumbnail embedYoutubeId productName');
+            return res.json(videos);
+        }
     } catch (err) {
         next(err);
     }
 });
+
+
+
 
 // API Product List
 router.get('/products', async (req, res, next) => {
-    const { videoId } = req.query;
-    if (!videoId) {
-        return res.status(400).json({ error: 'videoId is required in query parameters' });
-    }
+    const { videoId, title } = req.query;
 
     try {
-        const products = await Product.find({ videoId }, 'productId linkProduct title price');
-        const formattedProducts = products.map((product) => ({
-            productId: product.productId,
-            linkProduct: product.linkProduct,
-            title: product.title,
-            price: formatCurrency(product.price), // Use the formatCurrency function to convert to Rupiah format
-        }));
+        if (videoId && title) {
+            // Both videoId and title are provided, prioritize videoId search (logic same with else if (videoId)
+            const products = await Product.find({ videoId }, 'productId linkProduct title price');
+            const formattedProducts = products.map((product) => ({
+                productId: product.productId,
+                linkProduct: product.linkProduct,
+                title: product.title,
+                price: formatCurrency(product.price),
+            }));
+            return res.json(formattedProducts);
+        } else if (videoId) {
+            const products = await Product.find({ videoId }, 'productId linkProduct title price');
+            const formattedProducts = products.map((product) => ({
+                productId: product.productId,
+                linkProduct: product.linkProduct,
+                title: product.title,
+                price: formatCurrency(product.price), // Use the formatCurrency function to convert to Rupiah format
+            }));
 
-        res.json(formattedProducts);
+            return res.json(formattedProducts);
+        } else if (title) {
+            const regex = new RegExp(title, 'i'); // 'i' flag for case-insensitive
+            const projects = await Product.find({ title: regex }, 'videoId title price');
+
+            if (projects.length === 0) {
+                return res.status(200).json([]);
+            }
+
+            return res.json(projects);
+        } else {
+            return res.status(400).json({ error: 'videoId or title is required in query parameters' });
+        }
     } catch (err) {
         next(err);
     }
 });
+
 
 
 // API Comment List
@@ -58,6 +94,7 @@ router.get('/comments', async (req, res, next) => {
             userName: comment.userName,
             comment: comment.comment,
             timestamp: formatTimestamp(comment.updatedAt || comment.createdAt),
+            id: comment._id,
         }));
 
         res.json(formattedComments);

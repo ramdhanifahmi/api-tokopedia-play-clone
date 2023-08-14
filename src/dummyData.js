@@ -18,9 +18,16 @@ async function clearData() {
 
 // Dummy data for Video, Product, and Comment collections
 const sampleVideos = [
-    { videoId: 'vid001', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2020/11/19/959f09cf-d6fd-413e-ae0e-f92345712666.png' },
-    { videoId: 'vid002', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2023/1/12/7c389e2a-774d-4e4d-b60d-c4946c122195.png' },
-    { videoId: 'vid003', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2022/5/27/cfb2e3cc-eedf-44a7-9907-99692bc97ee9.jpg' },
+    { videoId: 'vid001', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2022/3/25/355ec4ff-da61-4d33-b140-f99ebb30c911.png', embedYoutubeId: '198rvXwEGE0', productName: 'Rubik 3x3 Magnetic' },
+    { videoId: 'vid002', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2023/1/12/7c389e2a-774d-4e4d-b60d-c4946c122195.png', embedYoutubeId: 'Slb7fnke2YU', productName: 'Rubik Pyraminx' },
+    { videoId: 'vid003', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2022/5/27/cfb2e3cc-eedf-44a7-9907-99692bc97ee9.jpg', embedYoutubeId: '7xNfsp764ws', productName: 'Rubik 3x3 Mirror' },
+    { videoId: 'vid004', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2023/1/13/3ca6a3b7-9cad-4f28-b03b-4187c412637c.png', embedYoutubeId: 'ZafrRDNNCR8', productName: 'Rubik 2x2 Stickerless' },
+    { videoId: 'vid005', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2022/7/20/a5cba52b-2fcc-4903-aa74-447ac7f921b2.jpg', embedYoutubeId: 'bXxRqisbMuc', productName: 'Rubik 4x4 Stickerless' },
+    { videoId: 'vid006', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2023/4/5/35cb08f0-d068-473a-b81c-4a19961341cc.jpg', embedYoutubeId: 'ws_xHDz-AvE', productName: 'Rubik Kibiminx' },
+    { videoId: 'vid007', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2022/4/21/65b76940-4674-42e4-a26c-cd87a0941708.png', embedYoutubeId: 'vc1ZQ4w7KCE', productName: 'Rubik Skewb' },
+    { videoId: 'vid008', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2023/1/12/fe7031bb-bd79-4c43-b40e-f6f07a36718e.png', embedYoutubeId: 'Yl5msXDaUUc', productName: 'Rubik Megaminx' },
+    { videoId: 'vid009', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2022/2/15/ca6da231-dcdd-4573-9f5b-73d35cac9b69.jpg', embedYoutubeId: 'yROiD7ffAMA', productName: 'Rubik 5x5 Stickerless' },
+    { videoId: 'vid010', urlImageThumbnail: 'https://images.tokopedia.net/img/cache/900/VqbcmM/2021/11/4/5bb2eecd-73c2-442c-8576-ceb0ccc5545d.jpg', embedYoutubeId: 'LbXLhm4vYD8', productName: 'Rubik Braille' },
 ];
 
 const sampleProducts = [

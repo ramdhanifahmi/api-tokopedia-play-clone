@@ -5,6 +5,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const mongoStr = process.env.DATABASE_URL;
+const cors = require('cors');
+
+
 
 mongoose.connect(mongoStr);
 
@@ -18,7 +21,10 @@ mongoose.connection.once('open', () => {
 
 const routes = require('./routes/routes.js');
 const app = express();
-
+app.use(cors({
+    origin: '*',
+    // allowHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', routes);
