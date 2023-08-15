@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const mongoStr = process.env.DATABASE_URL;
 const cors = require('cors');
+const moment = require('moment-timezone');
 
 
 
@@ -30,6 +31,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', routes);
 
 const port = process.env.PORT || 3000;
+
+// Set the server's timezone to 'Asia/Jakarta'
+moment.tz.setDefault('Asia/Jakarta');
 app.listen(port, () => {
     console.log(`Express Server is running on port ${port}`);
 });
